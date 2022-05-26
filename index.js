@@ -47,17 +47,7 @@ async function run() {
             const result = await toolCollection.find().toArray();
             res.send(result)
         })
-        app.post('/addProducts', async (req, res) => {
-            const addedProduct = req.body;
-            const product = await toolCollection.insertOne(addedProduct);
-            res.send(product)
-        })
-        app.get('/products/:id', async (req, res) => {
-            const id = req.params.id;
-            const query = { _id: ObjectId(id) }
-            const searchItem = await toolCollection.findOne(query);
-            res.send(searchItem)
-        })
+
         app.post('/order', async (req, res) => {
             const findOder = req.body;
             const order = await orderCollection.insertOne(findOder);
