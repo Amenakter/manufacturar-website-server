@@ -144,6 +144,15 @@ async function run() {
 
         })
 
+        app.get('/admin/:email', async (req, res) => {
+            const email = req.params.email;
+            console.log(email);
+            const user = await userCollection.findOne({ email: email });
+            const isAdmin = user?.role === "admin";
+            console.log(isAdmin);
+            res.send(isAdmin)
+        })
+
         // load alluser
         app.get('/allUser', verifyJTW, async (req, res) => {
             const allUser = await userCollection.find().toArray();
