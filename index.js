@@ -195,7 +195,7 @@ async function run() {
             });
 
         });
-
+        //  delete single orders
         app.delete('/orders/:id', async (req, res) => {
             const id = req.params.id;
             const query = { _id: ObjectId(id) };
