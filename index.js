@@ -48,6 +48,21 @@ async function run() {
             res.send(result)
         })
 
+        //insert product
+        app.post('/addProducts', async (req, res) => {
+            const addedProduct = req.body;
+            const product = await toolCollection.insertOne(addedProduct);
+            res.send(product)
+        })
+        // find a single product
+        app.get('/products/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) }
+            const searchItem = await toolCollection.findOne(query);
+            res.send(searchItem)
+        })
+
+        // store order data
         app.post('/order', async (req, res) => {
             const findOder = req.body;
             const order = await orderCollection.insertOne(findOder);
