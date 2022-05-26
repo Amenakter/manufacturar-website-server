@@ -68,12 +68,14 @@ async function run() {
             const order = await orderCollection.insertOne(findOder);
             res.send(order)
         })
+
         app.get('/order/:id', async (req, res) => {
             const id = req.params.id;
             const query = { _id: ObjectId(id) };
             const result = await orderCollection.findOne(query);
             res.send(result);
         })
+
         app.get('/order', verifyJTW, async (req, res) => {
             const email = req.query.email;
             const decodedEmail = req.decoded.email;
@@ -140,6 +142,7 @@ async function run() {
 
         })
 
+        // load alluser
         app.get('/allUser', verifyJTW, async (req, res) => {
             const allUser = await userCollection.find().toArray();
             res.send(allUser)
